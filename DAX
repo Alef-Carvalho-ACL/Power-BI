@@ -1,0 +1,26 @@
+DimDate_DAX_3 = 
+
+VAR MenorData = MIN(FactInternetSales[OrderDate])
+VAR MaiorData = MAX(FactInternetSales[OrderDate])
+
+VAR BaseCalendar = CALENDAR ( MenorData, MaiorData )
+RETURN
+    GENERATE (
+        BaseCalendar,
+        VAR BaseDate = [Date]
+        VAR DateKey = VALUE ( Format ( [Date], "YYYYMMDD" ) )
+        VAR YearDate = YEAR ( BaseDate )
+        VAR MonthNumber = MONTH ( BaseDate )
+        VAR MonthName = FORMAT ( BaseDate, "mmmm" )
+        VAR YearMonthName = FORMAT ( BaseDate, "mmm yy" )
+        VAR YearMonthNumber = YearDate * 12 + MonthNumber - 1
+        RETURN ROW (
+            "Day", BaseDate,
+            "DateKey", DateKey,
+            "Year", YearDate,
+            "Month Number", MonthNumber,
+            "Month", MonthName,
+            "Year Month Number", YearMonthNumber,
+            "Year Month", YearMonthName
+        )
+    )
