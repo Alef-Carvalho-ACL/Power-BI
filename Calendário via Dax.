@@ -1,9 +1,9 @@
 _dimData = 
 VAR MenorDia =
-    MIN ( FactDrop[CI_CREATED_DATE] )
+    MIN ( FactDrop[CI_CREATED_DATE] ) // Insira o campo data para referenciar o inicio
 
 VAR MaiorDia =
-    MAX ( FactDrop[CI_CREATED_DATE] )
+    MAX ( FactDrop[CI_CREATED_DATE] ) // Insira o campo data para referenciar o fim
 
 VAR BaseCalendar =
     CALENDAR ( MenorDia, MaiorDia )
