@@ -14,7 +14,7 @@ RETURN
         BaseCalendar,
         VAR BaseDate = [Date]
         VAR DateKey = 
-            VALUE ( FORMAT ( [Date], "YYYYMMDD" ) )
+            VALUE ( FORMAT ( BaseDate, "YYYYMMDD" ) )
         VAR Dia = 
             FORMAT (
                 DAY( BaseDate ),
@@ -34,7 +34,11 @@ RETURN
                             FORMAT ( BaseDate, "mmm" ), 2, 2
                         )
                     )
-        VAR MesAno = FORMAT ( BaseDate, "mmm yy" )
+        VAR MesAno = 
+                CONCATENATE (
+                        MesNome,
+                        FORMAT ( BaseDate, " yy" )
+                    )
         VAR Periodo = 
             IF (
                 YEAR ( BaseDate ) = YEAR ( TODAY () )
@@ -52,13 +56,12 @@ RETURN
                 WEEKNUM ( BaseDate, 1 ),
             "00" )
         RETURN ROW (
-            "Date", BaseDate,
             "DateKey", DateKey,
             "Dia", Dia,
+            "Mes", MesNumero,
             "Ano", Ano,
-            "Número do Mês", MesNumero,
-            "Mês", MesNome,
-            "Ano e Mês", MesAno,
+            "Mes_nome", MesNome,
+            "Ano e Mes", MesAno,
             "Período", Periodo,
             "Semana", Semana
         )
